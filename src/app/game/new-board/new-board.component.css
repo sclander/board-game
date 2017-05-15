@@ -1,0 +1,32 @@
+* {
+    user-select: none;
+}
+
+.cell {
+    border: 2px solid #777;
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    margin: -1px;
+    padding: 10px;
+}
+
+.row {
+    line-height: 0;
+}
+
+.token {
+    background-color: cornflowerblue;
+    border-radius: 15px;
+    cursor: pointer !important;  
+    font-size: 15px; 
+    height: 30px;
+    line-height: 15px;
+    position: absolute;
+    text-align: center;
+    width: 30px;
+}
+
+.token.green {
+    background-color: forestgreen;
+}

@@ -1,0 +1,8 @@
+<div class="chat">
+  <h3>Your user id is: {{userId}}</h3>
+  <input [(ngModel)]="message" /><button (click)="sendMessage()" [disabled]="isMyTurn">Click</button>
+  <div *ngFor="let message of messages">
+    {{message.text}}
+  </div>
+ </div>
+ <app-new-board></app-new-board>
