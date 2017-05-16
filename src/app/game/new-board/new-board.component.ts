@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 
 import { SocketService } from '../../socket.service';
 
@@ -21,22 +21,49 @@ import { SocketService } from '../../socket.service';
 // }
 
 export class NewBoardComponent implements OnInit {
-  board = {}
+  board = {
+    rows:[]
+  }
   connection: any;
 
   constructor(private socket: SocketService) {
     this.board = {
-      rows: [
-        [1, 2, 3, 4, 5, 6, 7],
-        [1, 2, 3, 4, 5, 6, 7],
-        [1, 2, 3, 4, 5, 6, 7],
-        [1, 2, 3, 4, 5, 6, 7],
-        [1, 2, 3, 4, 5, 6, 7],
-        [1, 2, 3, 4, 5, 6, 7],
-        [1, 2, 3, 4, 5, 6, 7]
-      ]
+      rows: this.makeBoard()  
     }
-   }
+    console.log(this.board);
+  }
+
+  ngOnChanges(changes) {
+    console.log(changes);
+  }
+
+  initBoard() {
+    this.board.rows = this.makeBoard();
+    this.broadcastNewBoard(this.board);
+  }
+
+  makeBoard() {
+    return Array.from({length: 7}, () => this.makeRow());
+  }
+
+  makeRow() {
+    return Array.from({length: 7}, () => this.randomEnv());
+  }
+
+  broadcastNewBoard(board) {
+    this.socket.onNewBoard(board);
+  }
+
+  onNewBoard(message) {
+    console.log('got here');
+    this.board = message.content.board;
+  }
+
+  randomEnv() {
+    const env = ['savanna', 'jungle', 'swamp', 'mountain', 'desert'];
+    const rand = Math.floor(Math.random() * 5);
+    return env[rand];
+  }
 
   ngOnInit() {
     this.connection = this.socket.getMainStream().subscribe( response => {
@@ -71,7 +98,10 @@ export class NewBoardComponent implements OnInit {
         break;
       case 'rotate':
         this.onRotate(message);
-        break;  
+        break;
+      case 'new-board':
+        this.onNewBoard(message);
+        break;    
       default: 
         console.error(`Message type "${message.type}" does not exist`);  
         break;

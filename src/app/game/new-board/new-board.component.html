@@ -2,8 +2,14 @@
 <button (click)="broadcastRotate('green-token', 'right')">Green Right</button>
 <button (click)="broadcastRotate('blue-token', 'left')">Blue Left</button>
 <button (click)="broadcastRotate('blue-token', 'right')">Blue Right</button>
+<button (click)="initBoard()">Make New Board</button>
 <div class="row" *ngFor="let row of board.rows; let rowIndex = index">
-  <div [id]="toAlpha(rowIndex) + colIndex" class="cell" *ngFor="let cell of row; let colIndex = index" (dragover)="allowDrop($event)" (drop)="drop($event)">
+  <div [id]="toAlpha(rowIndex) + colIndex" 
+  class="cell" 
+  [ngClass]="cell"
+  *ngFor="let cell of row; let colIndex = index" 
+  (dragover)="allowDrop($event)" 
+  (drop)="drop($event)">
     <div *ngIf="rowIndex == 0 && colIndex == 3" class="token" id="blue-token" draggable="true" (dragstart)="drag($event)">&#9650;</div>
     <div *ngIf="rowIndex == 6 && colIndex == 3" class="token green" id="green-token" draggable="true" (dragstart)="drag($event)">&#9650;</div>
   </div>

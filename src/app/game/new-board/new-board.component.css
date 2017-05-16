@@ -3,7 +3,7 @@
 }
 
 .cell {
-    border: 2px solid #777;
+    border: 2px solid #000;
     display: inline-block;
     height: 30px;
     width: 30px;
@@ -11,6 +11,25 @@
     padding: 10px;
 }
 
+.cell.savanna {
+    background-color: #cfef94;
+}
+
+.cell.jungle {
+    background-color: #6dbf7e;
+}
+
+.cell.swamp {
+    background-color: #a8aa55;
+}
+
+.cell.desert {
+    background-color: #f4e090;
+}
+
+.cell.mountain {
+    background-color: #c9ced6;
+}
 .row {
     line-height: 0;
 }

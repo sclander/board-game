@@ -76,4 +76,8 @@ export class SocketService {
   onRotate(tokenSelector, direction) {
     this.socket.emit('rotate', {token: tokenSelector, direction: direction});
   }
+
+  onNewBoard(board) {
+    this.socket.emit('new-board', {board: board});
+  }
 }

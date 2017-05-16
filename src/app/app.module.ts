@@ -9,6 +9,7 @@ import { GameComponent } from './game/game.component';
 import { BoardComponent } from './game/board/board.component';
 import { TokenComponent } from './game/new-board/token/token.component';
 import { NewBoardComponent } from './game/new-board/new-board.component';
+import { SheetsService } from './sheets.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { NewBoardComponent } from './game/new-board/new-board.component';
     FormsModule,
     HttpModule
   ],
-  providers: [SocketService],
+  providers: [SocketService, SheetsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

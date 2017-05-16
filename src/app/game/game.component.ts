@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SocketService } from '../socket.service';
+import { SheetsService } from '../sheets.service';
 
 @Component({
   selector: 'app-game',
@@ -12,7 +13,8 @@ export class GameComponent implements OnInit, OnDestroy {
   message: any;
   userId: string;
 
-  constructor(private socket: SocketService) { }
+  constructor(private socket: SocketService, private sheets: SheetsService) { }
+  cards = [];
 
   sendMessage() {
     this.socket.sendMessage(this.message + this.userId);
@@ -23,6 +25,7 @@ export class GameComponent implements OnInit, OnDestroy {
     this.connection = this.socket.getMessages().subscribe(message => {
       this.routeMessage(message);
     })
+    this.getCards();
   }
 
   ngOnDestroy() {
@@ -41,5 +44,22 @@ export class GameComponent implements OnInit, OnDestroy {
       default:
         console.log('heloo');
     }
+  }
+
+  getCards() {
+    this.sheets.getCards().subscribe( data => {
+      let entries = data.feed.entry;
+      for (let entry of entries) {
+        let content = entry.content.$t;
+        let powers = {
+          spirit: content.slice(content.indexOf('spirit:') + 7, content.indexOf('heart:') - 1),
+          heart: content.slice(content.indexOf('heart:') + 6, content.indexOf('body:') - 1),
+          body: content.slice(content.indexOf('body:') + 5, content.indexOf('soul:') - 1),
+          soul: content.slice(content.indexOf('soul:') + 5, content.length)
+        };
+
+        this.cards.push({title: entry.title.$t, content: content, powers: powers});
+      }
+    });
   }
 }
