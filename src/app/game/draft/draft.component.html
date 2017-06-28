@@ -1,0 +1,27 @@
+<div (dragover)="allowDrop($event)" (drop)="drop($event)">
+    <h2>Draft Cards</h2>
+    <div *ngFor="let card of cards; index as i" 
+    [attr.data-index]="i"
+    [id]="card.title | lowercase" 
+    class="card" 
+    [ngClass]="{'active' : card == activeCard}" 
+    (click)="activateCard(card)"
+    (dragstart)="drag($event)"
+    draggable="true"
+    >
+      <strong>{{card.title}}</strong>
+    </div>
+</div>
+<div *ngIf="activeCard">
+  <p class="power spirit">{{activeCard.powers.spirit}}</p>
+  <p class="power heart">{{activeCard.powers.heart}}</p>
+  <p class="power body">{{activeCard.powers.body}}</p>
+  <p class="power soul">{{activeCard.powers.soul}}</p>
+</div>
+<div>
+  <h2>Your Cards</h2>
+  <div id="my-spirit" class="card placeholder spirit" (dragover)="allowDrop($event)" (drop)="drop($event)"></div>
+  <div id="my-heart" class="card placeholder heart" (dragover)="allowDrop($event)" (drop)="drop($event)"></div>
+  <div id="my-body"class="card placeholder body" (dragover)="allowDrop($event)" (drop)="drop($event)"></div>
+  <div id="my-soul"class="card placeholder soul" (dragover)="allowDrop($event)" (drop)="drop($event)"></div>
+</div>

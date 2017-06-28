@@ -1,0 +1,49 @@
+.card {
+    background: #f0f0f0;
+    border: 1px solid #000;
+    border-radius: 8px;
+    display: inline-block;
+    font: 10px sans-serif;
+    height: 100px;
+    line-height: 100px;
+    margin: 10px;
+    text-align: center;
+    width: 75px;
+}
+
+.card.active {
+    border: 3px solid #77f;
+    background: #f0f0a0;
+}
+
+.placeholder>.card {
+    margin: 0;
+}
+
+.card:hover {
+    background: #f0f0a0;
+}
+
+.power {
+    border-radius: 5px;
+    display: inline-block;
+    padding: 5px;
+    vertical-align: top;
+    width: 23%;
+}
+
+.spirit {
+    background: #ff9;
+}
+
+.heart {
+    background: #f99;
+}
+
+.body {
+    background: #9f9;
+}
+
+.soul {
+    background: #99f;
+}
