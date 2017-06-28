@@ -80,4 +80,8 @@ export class SocketService {
   onNewBoard(board) {
     this.socket.emit('new-board', {board: board});
   }
+
+  onDraftPick(userId, cardIndex) {
+    this.socket.emit('draft-pick', {userId: userId, cardIndex: cardIndex});
+  }
 }

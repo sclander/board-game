@@ -1,16 +1,7 @@
-<h3>Your user id is: {{userId}}</h3>
-<div>
-    <h2>Cards</h2>
-    <ul>
-        <li *ngFor="let card of cards">
-            <strong>{{card.title}}</strong>
-            <div>
-                <p class="power spirit">{{card.powers.spirit}}</p>
-                <p class="power heart">{{card.powers.heart}}</p>
-                <p class="power body">{{card.powers.body}}</p>
-                <p class="power soul">{{card.powers.soul}}</p>
-            </div>
-        </li>
-    </ul>
-</div>
-<app-new-board></app-new-board>
+<header>
+    <h3>Your user id is: {{userId}}</h3>
+    <button (click)="view = 'board'">Board</button>
+    <button (click)="view = 'draft'">Draft</button>
+</header>
+<app-new-board [hidden]="view != 'board'"></app-new-board>
+<app-draft [hidden]="view != 'draft'"></app-draft>
